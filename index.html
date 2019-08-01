@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Text Adventure</title>
+    <style>
+            .console {
+                width: 100vw;
+                height: 100vh;
+                background-color: black;
+                color: green;
+                position: relative;
+                margin: 0px;
+                padding:0px;
+            }
+
+            .console ul {
+                position: absolute;
+                bottom: 0px;
+                width: 100vw;
+                background-color: black;
+                color: green;
+                border: none;
+                padding: 0px;
+            }
+
+            .console ul li {
+                list-style-type: none;
+                font-family: monospace;
+                font-size: 15px;
+                height: 20px;
+            }
+
+            .console ul li input[type="text"] {
+                width: 60vw;
+                height: 25px;
+                background-color: black;
+                color: green;
+                border: none;
+                font-family: monospace;
+                font-size: 15px;
+                height: 20px;
+            }
+
+            ::-webkit-input-placeholder {
+                color: green;
+                font-size: 15px;
+                }
+                ::-moz-placeholder {
+                color: green;
+                font-size: 15px;
+                }
+                :-ms-input-placeholder {
+                color: green;
+                font-size: 15px;
+                }
+                ::placeholder {
+                color: green;
+                font-size: 15px;
+                }
+                label {
+                    width: calc(10vw - 5px);
+                    text-align: right;
+                    clear: both;
+                    float:left;
+                    margin-right:5px;
+                }
+                .cursor {
+                    position: relative;
+                }
+                .cursor	i {
+                    position: absolute;
+                    width: 2px;
+                    height: 80%;
+                    background-color: green;
+                    left: calc(10vw - 5px);
+                    top: 10%;
+                    animation-name: blink;
+                    animation-duration: 1000ms;
+                    animation-iteration-count: infinite;
+                    opacity: 1;
+                }
+
+                .cursor input:focus + i {
+                    display: none;
+                }
+
+                @keyframes blink {
+                    from { opacity: 1; }
+                    to { opacity: 0; }
+                }
+    </style>
+</head>
+<body class="console">
+  <ul>
+    <li id="game-text">Welcome to Text Adventure</li>
+  </ul>
+
+  <ul>
+    <li class="cursor">
+      <label for="console-in">cmd></label>
+      <input id="console-in" placeholder="..." name="console-in" type="text" autofocus></input>
+      <i></i>
+    </li>
+  </ul>
+
+
+  <script type="text/javascript" src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script type="text/javascript" src="script.js"></script>
+  <script type="text/javascript" src="rooms.js"></script>
+  <script type="text/javascript" src="player.js"></script>
+</body>
