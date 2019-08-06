@@ -26,15 +26,20 @@ function showInventory(){
 }
 
 function takeItem(item){
-  if (rooms[currentRoom].items[item] !== undefined){
+  if (rooms[currentRoom].items[item] !== undefined && rooms[currentRoom].items[item].available == true){
+    // Print Game Text
     $("#game-text").append("<ul>")
     $('#game-text').append("<li>You have taken " + item + "</li>");
     $('#game-text').append("<li>" + rooms[currentRoom].items[item].description + "</li>");
+    // Update Inventory Arrays
     inventory.push(item);
     inventoryDescriptions.push(rooms[currentRoom].items[item].description);
+    // Set Object to unavailalbe
+    rooms[currentRoom].items[item].visible = false;
+    rooms[currentRoom].items[item].available = false;
   }
 else {
-    $('game-text').append("There is no " + item + " to take.");
+    $('#game-text').append("There is no " + item + " to take.");
   }
 }
 
@@ -67,13 +72,22 @@ function executeCommand (input){
       showInventory();
       break;
     default:
-      $("game-text").append("I don't know how to " + command);
+      $("#game-text").append("I don't know how to " + command);
   }
 }
 
 
 $(document).ready(function(){
-  $('#game-text').append("<p>" + rooms.start.description + "</p>");
+  // Print room description
+  $('#game-text').append("<p>" + rooms.start.description + "<br>");
+  // Print description of available items
+  var array = Object.keys(rooms.start.items);
+  for (i = 0; i < array.length; i++){
+    if(rooms.start.items[array[i]].visible == true){
+      $('#game-text').append(rooms.start.items[array[i]].comment + "<br>");
+    }
+  }
+  $('#game-text').append(rooms.start.items)
   $('#console-in').is(':focus');
 
   $(document).keypress(function(key){
